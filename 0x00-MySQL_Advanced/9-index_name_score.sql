@@ -1,6 +1,5 @@
--- Drop the existing index if it exists to avoid duplication
-DROP INDEX IF EXISTS idx_name_first_score ON names;
+-- Creates an index idx_name_first_score on table names and first letter of name and score
+-- Only first letter of name AND score must be indexed
 
--- Create a new index on the first letter of name and score for optimized search
-CREATE INDEX idx_name_first_score ON names (name(1), score);
-
+CREATE INDEX idx_name_first_score
+ON names(name(1), score);
