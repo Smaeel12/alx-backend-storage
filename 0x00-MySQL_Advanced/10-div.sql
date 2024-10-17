@@ -1,15 +1,16 @@
--- Drop the existing function if it exists to avoid duplication
-DROP FUNCTION IF EXISTS SafeDiv;
+-- SQL script that creates a function SafeDiv that divides (and returns) the first by the second number or returns 0 if the second number is equal to 0.
+DELIMITER //
 
--- Create the SafeDiv function to perform safe division
-CREATE FUNCTION SafeDiv(a INT, b INT) 
+CREATE FUNCTION SafeDiv(a INT, b INT)
 RETURNS FLOAT
 DETERMINISTIC
 BEGIN
-    -- Return 0 if b is 0, otherwise return the result of a divided by b
-    RETURN CASE 
-        WHEN b = 0 THEN 0 
-        ELSE a / b 
-    END;
-END;
+    IF b = 0 THEN
+        RETURN 0;
+    ELSE
+        RETURN a / b;
+    END IF;
+END //
+
+DELIMITER ;
 
